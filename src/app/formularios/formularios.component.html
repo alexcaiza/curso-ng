@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+      <h1 class="center">Formulario de Posts</h1>
+      <br>
+      {{ post | json }}
+
+      <form novalidate (ngSubmit)="onSubmit()" #postForm="ngForm">
+          
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input 
+                  type="text"
+                  class="form-control"
+                  id="title"
+                  required
+                  name="title"
+                  #title="ngModel"
+                  [(ngModel)]="model.title"
+              />
+              <div [hidden]="title.valid || title.pristine" style="color: firebrick">
+                El título es requerido
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label for="content">Content</label>
+              <textarea 
+                class="form-control"
+                  id="content"
+                  required
+                  name="content"
+                  #content="ngModel"
+                  [(ngModel)]="model.content"
+              ></textarea>  
+              <div [hidden]="content.valid || content.pristine" style="color: firebrick">
+                  El contenido es requerido
+              </div> 
+          </div>    
+
+          <div class="col s6 offset-s3">
+              <button 
+                  class="btn btn-primary"
+                  type="submit"
+                  [disabled]="!postForm.form.valid"
+              >
+                  Submit
+              </button>     
+          </div>    
+      </form>    
+  </div>
+</div>    
